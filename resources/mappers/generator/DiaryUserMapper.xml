@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yszt.base.dao.generator.DiaryUserMapper">
+  <resultMap id="BaseResultMap" type="com.yszt.base.model.generator.DiaryUser">
+    <id column="id_" jdbcType="INTEGER" property="id" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="sex" jdbcType="CHAR" property="sex" />
+    <result column="birthdary" jdbcType="DATE" property="birthdary" />
+    <result column="occupation" jdbcType="VARCHAR" property="occupation" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_by" jdbcType="INTEGER" property="createBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_by" jdbcType="INTEGER" property="updateBy" />
+    <result column="enable_" jdbcType="TINYINT" property="enable" />
+    <result column="portrait" jdbcType="VARCHAR" property="portrait" />
+    <result column="height" jdbcType="DOUBLE" property="height" />
+    <result column="weight" jdbcType="DOUBLE" property="weight" />
+    <result column="remark_" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from diary_user
+    where id_ = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id_" keyProperty="id" parameterType="com.yszt.base.model.generator.DiaryUser" useGeneratedKeys="true">
+    insert into diary_user (account, password, user_name, 
+      sex, birthdary, occupation, 
+      create_time, create_by, update_time, 
+      update_by, enable_, remark_,height,weight,portrait
+      )
+    values (#{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=CHAR}, #{birthdary,jdbcType=DATE}, #{occupation,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=INTEGER}, #{enable,jdbcType=TINYINT}, #{remark,jdbcType=VARCHAR},
+      #{height,jdbcType=DOUBLE},#{weight,jdbcType=DOUBLE},#{portrait,jdbcType=VARCHAR} 
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yszt.base.model.generator.DiaryUser">
+    update diary_user
+    set account = #{account,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=CHAR},
+      birthdary = #{birthdary,jdbcType=DATE},
+      occupation = #{occupation,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=INTEGER},
+      enable_ = #{enable,jdbcType=TINYINT},
+      remark_ = #{remark,jdbcType=VARCHAR},
+      height = #{height,jdbcType=DOUBLE},
+      weight = #{weight,jdbcType=DOUBLE},
+      portrait = #{portrait,jdbcType=VARCHAR}
+    where id_ = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id_, account, password, user_name, sex, birthdary, occupation, create_time, 
+    create_by, update_time, update_by, enable_, remark_,portrait,height,weight
+    from diary_user
+    where id_ = #{id,jdbcType=INTEGER} and enable_ = 1
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id_, account, password, user_name, sex, birthdary, occupation, create_time, 
+    create_by, update_time, update_by, enable_, remark_,height,weight,portrait
+    from diary_user where enable_ = 1
+  </select>
+</mapper>

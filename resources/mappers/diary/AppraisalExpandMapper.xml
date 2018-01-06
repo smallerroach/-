@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yszt.base.dao.diary.AppraisalExpandMapper">
+
+	<select id="query" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select id_ from appraisal where enable_ = 1 
+		<if test="createBy != null">
+			and create_by = #{createBy}
+		</if>
+	</select>
+
+	<select id="ranKing" parameterType="java.lang.Float" resultType="java.util.Map">
+		 <![CDATA[  
+			SELECT a.a max,b.b min,c.c equal,d.d sum from 
+			(select COUNT(*) a FROM appraisal where score >= ${value}) a,
+			(select COUNT(*) b FROM appraisal where score < ${value}) b,
+			(select COUNT(*) c FROM appraisal where score = ${value}) c,
+			(select COUNT(*) d from appraisal) d
+		]]>
+	</select> 
+
+</mapper>

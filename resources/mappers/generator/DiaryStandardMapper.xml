@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yszt.base.dao.generator.DiaryStandardMapper">
+  <resultMap id="BaseResultMap" type="com.yszt.base.model.generator.DiaryStandard">
+    <id column="id_" jdbcType="INTEGER" property="id" />
+    <result column="diary_code" jdbcType="VARCHAR" property="diaryCode" />
+    <result column="ori_text_id" jdbcType="INTEGER" property="oriTextId" />
+    <result column="diary_date" jdbcType="TIMESTAMP" property="diaryDate" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="action_addr" jdbcType="VARCHAR" property="actionAddr" />
+    <result column="action_state" jdbcType="VARCHAR" property="actionState" />
+    <result column="weather" jdbcType="VARCHAR" property="weather" />
+    <result column="emotion" jdbcType="VARCHAR" property="emotion" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_by" jdbcType="INTEGER" property="createBy" />
+    <result column="update_by" jdbcType="INTEGER" property="updateBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="enable_" jdbcType="BIT" property="enable" />
+    <result column="remark_" jdbcType="VARCHAR" property="remark" />
+    <result column="audio_location" jdbcType="VARCHAR" property="audioLocation"/>
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from diary_standard
+    where id_ = #{id,jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="insert" keyColumn="id_" keyProperty="id" parameterType="com.yszt.base.model.generator.DiaryStandard" useGeneratedKeys="true">
+    insert into diary_standard (diary_code, ori_text_id, diary_date, 
+      start_time, end_time, action_addr, 
+      action_state, weather, emotion, 
+      create_time, create_by, update_by, 
+      update_time, enable_, remark_,audio_location
+      )
+    values (#{diaryCode,jdbcType=VARCHAR}, #{oriTextId,jdbcType=INTEGER}, #{diaryDate,jdbcType=TIMESTAMP}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{actionAddr,jdbcType=VARCHAR}, 
+      #{actionState,jdbcType=VARCHAR}, #{weather,jdbcType=VARCHAR}, #{emotion,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=INTEGER}, #{updateBy,jdbcType=INTEGER}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{enable,jdbcType=BIT}, #{remark,jdbcType=VARCHAR},#{audioLocation,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+  <update id="updateByPrimaryKey" parameterType="com.yszt.base.model.generator.DiaryStandard">
+    update diary_standard
+    set 
+      diary_code = #{diaryCode,jdbcType=VARCHAR},
+      ori_text_id = #{oriTextId,jdbcType=INTEGER},
+      diary_date = #{diaryDate,jdbcType=DATE},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      action_addr = #{actionAddr,jdbcType=VARCHAR},
+      action_state = #{actionState,jdbcType=VARCHAR},
+      weather = #{weather,jdbcType=VARCHAR},
+      emotion = #{emotion,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=INTEGER},
+      update_by = #{updateBy,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      enable_ = #{enable,jdbcType=BIT},
+      remark_ = #{remark,jdbcType=VARCHAR},
+      audio_location = #{audioLocation,jdbcType=VARCHAR}
+    where id_ = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id_, diary_code, ori_text_id, diary_date, start_time, end_time, action_addr, 
+    action_state, weather, emotion, create_time, create_by, update_by, update_time, enable_, 
+    remark_,audio_location
+    from diary_standard
+    where id_ = #{id,jdbcType=INTEGER} and enable_ = 1
+  </select>
+  
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id_, diary_code, ori_text_id, diary_date, start_time, end_time, action_addr, 
+    action_state, weather, emotion, create_time, create_by, update_by, update_time, enable_, 
+    remark_,audio_location
+    from diary_standard  where enable_ = 1
+  </select>
+</mapper>

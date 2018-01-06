@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yszt.base.dao.diary.DiaryStandardExpandMapper">
+
+	<select id="query" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select id_ from diary_standard where enable_ = 1 
+		<if test="createBy != null">
+		    and create_by = #{createBy}
+		</if>
+		<if test="diaryDate != null">
+		    and diary_date = DATE_FORMAT(#{diaryDate},'%Y%m%d')
+		</if>
+		<if test="startTime !=null">
+			and start_time = DATE_FORMAT(#{startTime},'%Y%m%d')
+		</if>
+		<if test="account != null">
+			and create_by = 
+			(select id_ from diary_user du where du.account = #{account})
+		</if>
+		<if test="startTime1 != null and endTime1 !=null" >
+		 	and start_time BETWEEN #{startTime1} and #{endTime1}
+		 </if>
+	</select>
+	
+	<select id="count" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select count(*) from diary_standard where enable_ = 1
+		 and create_by = 
+			(select id_ from diary_user du where du.account = #{account})
+		 <if test="startTime1 != null and endTime1 !=null" >
+		 	and start_time BETWEEN #{startTime1} and #{endTime1}
+		 </if>
+	</select>
+	
+	
+</mapper>

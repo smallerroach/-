@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yszt.base.dao.generator.AppversionsMapper">
+  <resultMap id="BaseResultMap" type="com.yszt.base.model.generator.AppVersions">
+    <id column="id_" jdbcType="INTEGER" property="id" />
+    <result column="create_by" jdbcType="INTEGER" property="createBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_by" jdbcType="INTEGER" property="updateBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="enable_" jdbcType="TINYINT" property="enable" />
+    <result column="remark_" jdbcType="VARCHAR" property="remark" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="appName" jdbcType="VARCHAR" property="appname" />
+    <result column="upload_location" jdbcType="VARCHAR" property="uploadLocation" />
+    <result column="version_number" jdbcType="VARCHAR" property="versionNumber" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from appVersions
+    where id_ = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id_" keyProperty="id" parameterType="com.yszt.base.model.generator.AppVersions" useGeneratedKeys="true">
+    insert into appVersions (create_by, create_time, update_by, 
+      update_time, enable_, remark_, 
+      version, appName, upload_location, 
+      version_number)
+    values (#{createBy,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=INTEGER}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{enable,jdbcType=TINYINT}, #{remark,jdbcType=VARCHAR}, 
+      #{version,jdbcType=INTEGER}, #{appname,jdbcType=VARCHAR}, #{uploadLocation,jdbcType=VARCHAR}, 
+      #{versionNumber,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yszt.base.model.generator.AppVersions">
+    update appVersions
+    set create_by = #{createBy,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      enable_ = #{enable,jdbcType=TINYINT},
+      remark_ = #{remark,jdbcType=VARCHAR},
+      version = #{version,jdbcType=INTEGER},
+      appName = #{appname,jdbcType=VARCHAR},
+      upload_location = #{uploadLocation,jdbcType=VARCHAR},
+      version_number = #{versionNumber,jdbcType=VARCHAR}
+    where id_ = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id_, create_by, create_time, update_by, update_time, enable_, remark_, version, 
+    appName, upload_location, version_number
+    from appVersions
+    where id_ = #{id,jdbcType=INTEGER} and  enable_ = 1
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id_, create_by, create_time, update_by, update_time, enable_, remark_, version, 
+    appName, upload_location, version_number
+    from appVersions where enable_ = 1
+  </select>
+</mapper>
